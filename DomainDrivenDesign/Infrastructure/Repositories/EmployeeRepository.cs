@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Interfaces.Employee;
 using Infrastructure.Data;
-using Infrastructure.Persistence.Employee;
 
 namespace Infrastructure.Repositories
 {

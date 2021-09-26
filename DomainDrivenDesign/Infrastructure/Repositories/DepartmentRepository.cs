@@ -4,8 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Interfaces.Department;
 using Infrastructure.Data;
-using Infrastructure.Persistence.Department;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories

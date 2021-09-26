@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Interfaces.Department;
 using FluentValidation;
 using Infrastructure.Data;
-using Infrastructure.Persistence.Department;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.DTOS.Departments

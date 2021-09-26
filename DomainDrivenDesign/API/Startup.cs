@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using API.Common.Filters;
 using API.Extensions;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -36,7 +37,7 @@ namespace API
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-           services.AddControllers()
+           services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>())
                 .AddFluentValidation(s => 
                 { 
                     s.RegisterValidatorsFromAssemblyContaining<Startup>(); 

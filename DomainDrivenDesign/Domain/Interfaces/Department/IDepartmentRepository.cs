@@ -4,9 +4,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Interfaces;
 
-namespace Infrastructure.Persistence.Department
+namespace Domain.Interfaces.Department
 {
-    public interface IDepartmentRepository: IBaseRepository<Domain.Entities.Department>
+    public interface IDepartmentRepository: IBaseRepository<Entities.Department>
     {
         Task<bool> IsDepartmentNameUnique(string name);
     }

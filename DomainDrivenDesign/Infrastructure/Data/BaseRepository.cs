@@ -42,9 +42,9 @@ namespace Infrastructure.Data
             return await _dbSet.FirstOrDefaultAsync(expression);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression = null)
         {
-            return await _dbSet.Where(expression).ToListAsync();
+            return expression != null ? await _dbSet.Where(expression).ToListAsync(): await _dbSet.ToListAsync();
         }
     }
 }

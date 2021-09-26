@@ -13,10 +13,11 @@ namespace API.Mapper
         public MappingProfile()
         {
             //DTO to Entity
-            CreateMap<AddDepartmentRequest, Department>();
+            CreateMap<AddDepartmentRequest, Department>()
+                .ForMember(x => x.Id, otp => otp.Ignore());
 
             //Entity to DTO
-            CreateMap<Department, AddDepartmentResponse>();
+            CreateMap<Department, DepartmentResponse>();
         }
     }
 }

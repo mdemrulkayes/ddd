@@ -13,6 +13,6 @@ namespace Domain.Interfaces
         Task<T> UpdateAsync(T entity);
         Task DeleteAsync(T entity);
         Task<T> GetAsync(Expression<Func<T, bool>> expression);
-        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression);
+        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression = null);
     }
 }

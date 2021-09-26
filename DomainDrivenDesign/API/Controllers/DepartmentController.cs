@@ -20,23 +20,41 @@ namespace API.Controllers
             _departmentService = departmentService;
         }
 
+        [HttpGet]
+        [ProducesDefaultResponseType(typeof(List<DepartmentResponse>))]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _departmentService.GetAllDepartments());
+        }
+
+        [HttpGet("{id:long}")]
+        [ProducesDefaultResponseType(typeof(DepartmentResponse))]
+        public async Task<IActionResult> Get(Int64 id)
+        {
+            return Ok(await _departmentService.GetDepartment(id));
+        }
+
         [HttpPost]
-        [ProducesDefaultResponseType(typeof(AddDepartmentResponse))]
+        [ProducesDefaultResponseType(typeof(DepartmentResponse))]
         public async Task<IActionResult> Create([FromBody] AddDepartmentRequest request)
         {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                var dept = await _departmentService.CreateDepartment(request);
-                return Ok(dept);
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            var dept = await _departmentService.CreateDepartment(request);
+            return Ok(dept);
+        }
+
+
+        [HttpPut("{id:long}")]
+        [ProducesDefaultResponseType(typeof(DepartmentResponse))]
+        public async Task<IActionResult> Update(Int64 id, [FromBody] AddDepartmentRequest request)
+        {
+            return Ok(await _departmentService.UpdateDepartment(id, request));
+        }
+
+        [HttpDelete("{id:long}")]
+        [ProducesDefaultResponseType(typeof(int))]
+        public async Task<IActionResult> Delete(Int64 id)
+        {
+            return Ok(await _departmentService.DeleteDepartment(id));
         }
     }
 }
