@@ -6,19 +6,23 @@ using API.Common.Exceptions;
 using API.DTOS.Departments;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces;
 using Domain.Interfaces.Department;
+using Domain.Interfaces.Employee;
 
 namespace API.Services
 {
     public class DepartmentService: BaseService
     {
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
-        public DepartmentService(IUnitOfWork unitOfWork, IDepartmentRepository departmentRepository, IMapper mapper): base(unitOfWork)
+        public DepartmentService(IUnitOfWork unitOfWork, IDepartmentRepository departmentRepository, IMapper mapper, IEmployeeRepository employeeRepository): base(unitOfWork)
         {
             _departmentRepository = departmentRepository;
             _mapper = mapper;
+            _employeeRepository = employeeRepository;
         }
 
         public async Task<DepartmentResponse> CreateDepartment(AddDepartmentRequest request)
@@ -52,6 +56,7 @@ namespace API.Services
             }
             var mappedResult = _mapper.Map<AddDepartmentRequest, Department>(request, data);
             var result = await _departmentRepository.UpdateAsync(mappedResult);
+            await UnitOfWork.SaveChangesAsync();
             return _mapper.Map<Department, DepartmentResponse>(result);
         }
 
@@ -64,6 +69,7 @@ namespace API.Services
             }
 
             await _departmentRepository.DeleteAsync(data);
+            await UnitOfWork.SaveChangesAsync();
             return 1;
         }
     }

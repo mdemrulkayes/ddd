@@ -20,7 +20,8 @@ namespace API.Extensions
         {
             services.AddDbContext<ApplicationDbContext>(opt =>
             {
-                opt.UseInMemoryDatabase("Employee");
+                //opt.UseInMemoryDatabase("Employee");
+                opt.UseSqlServer(configuration.GetConnectionString("CS"));
             });
             return services;
         }

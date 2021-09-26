@@ -18,7 +18,14 @@ namespace Infrastructure.Data
 
         public async Task<int> SaveChangesAsync()
         {
-            return await _dbContext.SaveChangesAsync();
+            try
+            {
+                return await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         public IBaseRepository<T> Repository<T>() where T : BaseEntity
